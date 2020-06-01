@@ -14,7 +14,7 @@ services:
     command: bash -c "yarn install && yarn start -L"
     volumes:
       - ./client:/client
-      # - /client/node_modules
+      - /client/node_modules
     ports:
       - 3000:3000
   server:
