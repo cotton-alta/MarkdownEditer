@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import "./assets/style/variables.scss";
+import List from "./pages/List";
+import Detail from "./pages/Detail";
 
 const App: React.FC = () => {
   return (
-    <div>
-    </div>
+    <Fragment>
+      <Router>
+        <Route exact path='/' component={List} />
+        <Route path='/edit/:edit' component={Detail} />
+      </Router>
+    </Fragment>
   );
 }
 
