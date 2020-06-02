@@ -1,0 +1,11 @@
+.edit {
+  &-wrapper {
+    width: 50%;
+    // height: calc(100vh - 70px);
+    height: 100vh;
+  }
+  &-main {
+    height: 100%;
+    font-size: calc(20px + 0.4vw);
+  }
+}
