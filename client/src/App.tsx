@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import List from "./pages/List";
-import Detail from "./pages/Detail";
+import { Detail } from "./pages/Detail";
 
 const App: React.FC = () => {
   return (

@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import MonacoEditor from 'react-monaco-editor';
+
+import { TextContext } from "../../pages/Detail";
 
 import "../../assets/style/edit.scss";
 
 const Edit: React.FC = () => {
+  const { state, dispatch } = useContext(TextContext);
 
   const [text, setText] = useState("");
   let editor_size: any = null;
 
   const inputText = (newValue: string, e: any) => {
+    dispatch({
+      type: "changeText",
+      payload: {
+        text: text
+      }
+    });
     setText(newValue);
+    console.log(newValue);
   };
 
   const editorDidMount = (editor: any) => {
@@ -45,4 +55,4 @@ const Edit: React.FC = () => {
   )
 };
 
-export default Edit;
+export { Edit };

@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useReducer, useEffect } from "react";
 
 import Header from "../components/layouts/Header";
 import Side from "../components/layouts/Side";
-import Edit from "../components/layouts/Edit";
+import { Edit } from "../components/layouts/Edit";
 import View from "../components/layouts/View";
+
+import { detailReducer } from "../actions/detailReducer";
 
 import "../assets/style/detail.scss";
 
+const TextContext = React.createContext<any>(null);
+const initText = {
+  text: ""
+}
+
 const Detail: React.FC = () => {
+  const [ state, dispatch ] = useReducer(detailReducer, initText);
+  const value = { state, dispatch };
+
+  useEffect(() => {
+    console.log(state);
+  }, [ state ]);
+
   return (
     <div className="detail-container">
-      <Header />
-      <Side />
-      <Edit />
-      <View />
+      <TextContext.Provider value={value}>
+        <Header />
+        <Side />
+        <Edit />
+        <View />
+      </TextContext.Provider>
     </div>
   )
 };
 
-export default Detail;
+export {
+  TextContext,
+  initText,
+  Detail
+} 
