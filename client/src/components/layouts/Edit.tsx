@@ -1,30 +1,46 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
-import * as Monaco from "monaco-editor/esm/vs/editor/editor.api";
+import React, { useState } from "react";
+import MonacoEditor from 'react-monaco-editor';
 
 import "../../assets/style/edit.scss";
 
 const Edit: React.FC = () => {
-  const editorDiv = useRef<HTMLDivElement>(null);
-  
-  // 後でuseReducerに変える
-  const [editor, setEditor] = useState<Monaco.editor.IStandaloneCodeEditor | null>(null);
-  
-  useLayoutEffect(() => {
-    const editorInit = Monaco.editor.create(editorDiv.current!, {
-      value: "",
-      language: "markdown",
-      automaticLayout: true
-    });
-    editorInit.focus();
-    setEditor(editorInit);
-    return () => {
-      editorInit.dispose();
-    };
-  }, []);
+
+  const [text, setText] = useState("");
+  let editor_size: any = null;
+
+  const inputText = (newValue: string, e: any) => {
+    setText(newValue);
+  };
+
+  const editorDidMount = (editor: any) => {
+    editor_size = editor
+  }
+
+  window.onresize = () => {
+    if(editor_size.layout()) {
+      editor_size.layout();
+    } else {
+      return;
+    }
+  };
 
   return (
     <div className="edit-wrapper">
-      <div ref={editorDiv} className="edit-main" />
+      <MonacoEditor 
+        width="100%"
+        height="100vh"
+        language="markdown"
+        theme="vs-dark"
+        value={text}
+        onChange={inputText}
+        editorDidMount={editorDidMount}
+        options={{
+          minimap: {
+            enabled: false
+          },
+          fontSize: 18
+        }}
+      />
     </div>
   )
 };

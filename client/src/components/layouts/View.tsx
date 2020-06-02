@@ -1,8 +1,10 @@
 import React from "react";
 
+import "../../assets/style/view.scss";
+
 const View: React.FC = () => {
   return (
-    <div>
+    <div className="view-wrapper">
 
     </div>
   )
