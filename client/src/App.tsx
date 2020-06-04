@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import List from "./pages/List";
 import { Detail } from "./pages/Detail";
 
-import "./assets/style/reset.scss";
+// import "./assets/style/reset.scss";
 
 const App: React.FC = () => {
   return (

@@ -1,5 +1,10 @@
-import React, { useState, useContext } from "react";
-import MonacoEditor from 'react-monaco-editor';
+import React, { useState, useContext, useEffect } from "react";
+// import MonacoEditor from 'react-monaco-editor';
+import brace from 'brace';
+import Editor from "react-ace";
+
+import "brace/mode/markdown";
+import "brace/theme/terminal";
 
 import { TextContext } from "../../pages/Detail";
 
@@ -9,47 +14,33 @@ const Edit: React.FC = () => {
   const { state, dispatch } = useContext(TextContext);
 
   const [text, setText] = useState("");
-  let editor_size: any = null;
 
-  const inputText = (newValue: string, e: any) => {
+  const inputText = (newValue: string) => {
+    setText(newValue);
+  };
+  
+  useEffect(() => {
     dispatch({
       type: "changeText",
       payload: {
         text: text
       }
     });
-    setText(newValue);
-    console.log(newValue);
-  };
-
-  const editorDidMount = (editor: any) => {
-    editor_size = editor
-  }
-  
-  window.onresize = () => {
-    if(editor_size.layout()) {
-      editor_size.layout({glyphMarginWidth:0});
-    } else {
-      return;
-    }
-  };
+  }, [text]);
 
   return (
     <div className="edit-wrapper">
-      <MonacoEditor 
-        width="100%"
-        height="100%"
-        language="markdown"
-        theme="vs-dark"
+      <Editor 
+        className="edit-main"
+        mode="markdown"
+        theme="terminal"
+        height="null"
+        width="null"
+        fontSize={18}
         value={text}
+        name="UNIQUE_ID_OF_DIV"
+        editorProps={{$blockScrolling: true}}
         onChange={inputText}
-        editorDidMount={editorDidMount}
-        options={{
-          minimap: {
-            enabled: false
-          },
-          fontSize: 18,
-        }}
       />
     </div>
   )

@@ -27,8 +27,8 @@ const Detail: React.FC = () => {
       <TextContext.Provider value={value}>
         <Header />
         {/* <Side /> */}
-        <View />
         <Edit />
+        <View />
       </TextContext.Provider>
     </div>
   )
