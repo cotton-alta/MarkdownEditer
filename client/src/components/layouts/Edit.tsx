@@ -25,10 +25,10 @@ const Edit: React.FC = () => {
   const editorDidMount = (editor: any) => {
     editor_size = editor
   }
-
+  
   window.onresize = () => {
     if(editor_size.layout()) {
-      editor_size.layout();
+      editor_size.layout({glyphMarginWidth:0});
     } else {
       return;
     }
@@ -38,7 +38,7 @@ const Edit: React.FC = () => {
     <div className="edit-wrapper">
       <MonacoEditor 
         width="100%"
-        height="100vh"
+        height="100%"
         language="markdown"
         theme="vs-dark"
         value={text}
@@ -48,7 +48,7 @@ const Edit: React.FC = () => {
           minimap: {
             enabled: false
           },
-          fontSize: 18
+          fontSize: 18,
         }}
       />
     </div>
