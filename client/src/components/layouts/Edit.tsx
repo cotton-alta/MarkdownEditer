@@ -10,7 +10,14 @@ import "brace/theme/terminal";
 import { TextContext } from "../../pages/Detail";
 
 import "../../assets/style/edit.scss";
-import { Socket } from "dgram";
+
+const socket = io.connect("http://localhost:4000", { 
+  transports: [ 'websocket' ]
+});
+
+socket.on("connect", () => {
+  socket.emit("create connection");
+});
 
 const Edit: React.FC = () => {
   const { state, dispatch } = useContext(TextContext);
@@ -21,11 +28,7 @@ const Edit: React.FC = () => {
   const inputText = (newValue: string) => {
     setText(newValue);
   };
-  
-  const socket = io.connect("http://localhost:4000", { transports: [ 'websocket' ] });
-  // socket.on("connect", () => {
-  //   socket.emit("create connection");
-  // });
+
   useEffect(() => {
     dispatch({
       type: "changeText",
@@ -34,7 +37,7 @@ const Edit: React.FC = () => {
       }
     });
     setCount(count + 1);
-    if(count === 10) {
+    if(count === 5) {
       socket.emit("change text", text);
       setCount(0);
     }

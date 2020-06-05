@@ -24,9 +24,9 @@ const server = app.listen(4000,()=>{ console.log('Example app listening on port 
 
 const io = socket(server);
 io.sockets.on("connection", (socket: any) => {
-  // socket.on("create connection", () => {
-  //   console.log("server ok!");
-  // });
+  socket.on("create connection", () => {
+    console.log("server ok!");
+  });
   let state_text = "";
 
   socket.on("change text", (text: string) => {
