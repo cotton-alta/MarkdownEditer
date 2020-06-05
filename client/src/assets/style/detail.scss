@@ -3,4 +3,10 @@
     width: 100%;
     height: calc(100vh - 70px);
   }
+  &-wrapper:after{
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+  }
 }
