@@ -1,6 +1,10 @@
 import express from "express";
 import socket from "socket.io";
+import mongoose from "mongoose";
+import * as contentController from "./controllers/contentController";
 const app: express.Express = express();
+
+require('dotenv').config();
 
 // CORSの許可
 app.use((req, res, next) => {
@@ -13,6 +17,14 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const options = {
+  user: process.env.MONGO_USERNAME,
+  pass: process.env.MONGO_PASSWORD,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+
+mongoose.connect("mongodb://mongo:27017/markdown", options);
 
 // GetとPostのルーティング
 app.get('/', (req:express.Request, res:express.Response) => {
@@ -28,9 +40,10 @@ io.sockets.on("connection", (socket: any) => {
     console.log("server ok!");
   });
   let state_text = "";
-
+  
   socket.on("change text", (text: string) => {
     state_text = text;
+    contentController.getContent();
     console.log(state_text);
   });
 
