@@ -1,8 +1,9 @@
-.view-wrapper {
+.view {
   &-wrapper {
     float: left;
-    width: 50%;
-    height: 100%;
+    width: 40%;
+    // height: 100%;
+    height: calc(100vh - 70px);
     overflow-y: scroll;
   }
 }

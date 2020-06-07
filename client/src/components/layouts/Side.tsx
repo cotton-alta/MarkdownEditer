@@ -1,8 +1,10 @@
 import React from "react";
 
+import "../../assets/style/side.scss";
+
 const Side: React.FC = () => {
   return (
-    <div>
+    <div className="side-wrapper">
 
     </div>
   )

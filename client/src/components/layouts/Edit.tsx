@@ -44,9 +44,8 @@ const Edit: React.FC = () => {
   }, [text]);
 
   return (
-    <div className="edit-wrapper">
       <Editor 
-        className="edit-main"
+        className="edit-wrapper"
         mode="markdown"
         theme="terminal"
         height="null"
@@ -57,7 +56,6 @@ const Edit: React.FC = () => {
         editorProps={{$blockScrolling: true}}
         onChange={inputText}
       />
-    </div>
   )
 };
 

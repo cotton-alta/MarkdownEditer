@@ -26,7 +26,7 @@ const Detail: React.FC = () => {
     <div className="detail-container">
       <TextContext.Provider value={value}>
         <Header />
-        {/* <Side /> */}
+        <Side />
         <Edit />
         <View />
       </TextContext.Provider>

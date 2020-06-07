@@ -1,9 +1,9 @@
 .detail {
-  &-wrapper {
+  &-container {
     width: 100%;
-    height: calc(100vh - 70px);
+    height: 100vh;
   }
-  &-wrapper:after{
+  &-container:after{
     content: "";
     display: block;
     height: 0;
