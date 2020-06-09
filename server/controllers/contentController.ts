@@ -1,12 +1,17 @@
 import express from "express";
 import { Contents } from "../models/contents";
 
-const getContent = () => {
-  // res.send("ok");
-  Contents.find({}, (err: any, result: any) => {
-    console.log(result);
-  });
-  console.log("get content");
+type ResultType = {
+  title: string,
+  text: string,
+  created: string,
+  updated: string
+}
+
+const getContent = async (editPath: string) => {
+  let data: ResultType;
+  data = await Contents.findById(editPath);
+  return data.text;
 };
 
 export {

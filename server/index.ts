@@ -22,28 +22,39 @@ const options = {
   pass: process.env.MONGO_PASSWORD,
   useNewUrlParser: true,
   useUnifiedTopology: true
-}
+};
 
 mongoose.connect("mongodb://mongo:27017/markdown", options);
 
 // GetとPostのルーティング
 app.get('/', (req:express.Request, res:express.Response) => {
   res.send("OK")
-})
+});
 
 // 4000番ポートでAPIサーバ起動
-const server = app.listen(4000,()=>{ console.log('Example app listening on port 4000!') });
+const server = app.listen(4000,()=>{ console.log('listening on port 4000!') });
 
 const io = socket(server);
 io.sockets.on("connection", (socket: any) => {
+  let editPath: string;
+  let initData: string;
   socket.on("create connection", () => {
     console.log("server ok!");
   });
+  socket.on("path connection", (path: any) => {
+    console.log("path : ", path);
+    editPath = path;
+    contentController.getContent(editPath)
+    .then((result: string) => {
+      initData = result;
+      console.log("initData : ", initData);
+      socket.emit("init data", initData);
+    });
+  });
   let state_text = "";
-  
+
   socket.on("change text", (text: string) => {
     state_text = text;
-    contentController.getContent();
     console.log(state_text);
   });
 
