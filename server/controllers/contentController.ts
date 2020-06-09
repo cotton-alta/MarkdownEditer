@@ -14,6 +14,11 @@ const getContent = async (editPath: string) => {
   return data.text;
 };
 
+const updateContent = (text: string) => {
+
+  return;
+};
+
 export {
   getContent
 }

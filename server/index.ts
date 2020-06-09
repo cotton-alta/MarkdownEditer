@@ -32,22 +32,25 @@ app.get('/', (req:express.Request, res:express.Response) => {
 });
 
 // 4000番ポートでAPIサーバ起動
-const server = app.listen(4000,()=>{ console.log('listening on port 4000!') });
+const server = app.listen(4000, () => {
+  console.log('listening on port 4000!');
+});
 
 const io = socket(server);
 io.sockets.on("connection", (socket: any) => {
-  let editPath: string;
-  let initData: string;
+  let editPath: string,
+      initData: string;
   socket.on("create connection", () => {
     console.log("server ok!");
   });
   socket.on("path connection", (path: any) => {
-    console.log("path : ", path);
     editPath = path;
     contentController.getContent(editPath)
     .then((result: string) => {
       initData = result;
+      console.log("path : ", path);
       console.log("initData : ", initData);
+
       socket.emit("init data", initData);
     });
   });

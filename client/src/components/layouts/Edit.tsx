@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-// import MonacoEditor from 'react-monaco-editor';
 import brace from 'brace';
 import Editor from "react-ace";
 import io from "socket.io-client";
@@ -55,18 +54,18 @@ const Edit: React.FC = () => {
   }, [text]);
 
   return (
-      <Editor 
-        className="edit-wrapper"
-        mode="markdown"
-        theme="terminal"
-        height="null"
-        width="null"
-        fontSize={18}
-        value={text}
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{$blockScrolling: true}}
-        onChange={inputText}
-      />
+    <Editor 
+      className="edit-wrapper"
+      mode="markdown"
+      theme="terminal"
+      height="null"
+      width="null"
+      fontSize={18}
+      value={text}
+      name="UNIQUE_ID_OF_DIV"
+      editorProps={{$blockScrolling: true}}
+      onChange={inputText}
+    />
   )
 };
 
