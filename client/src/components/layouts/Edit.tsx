@@ -19,6 +19,14 @@ socket.on("connect", () => {
   socket.emit("create connection");
 });
 
+// 同期用コード
+// let serverFlag = false;
+
+// socket.on("server change", (text: string) => {
+//   console.log("data catch!")
+//   serverFlag = true;
+// });
+
 const Edit: React.FC = () => {
   const { state, dispatch } = useContext(TextContext);
   const [text, setText] = useState("");
@@ -29,8 +37,9 @@ const Edit: React.FC = () => {
     setText(newValue);
   };
 
+  
   useEffect(() => {
-    // let path = "5ede3a2c5e6369984dd13059";
+    // let path = "5edf9fcf8883a08621f5228d";
     let initData: string = "";
     socket.emit("path connection", edit);
     socket.on("init data", (data: string) => {
@@ -38,19 +47,18 @@ const Edit: React.FC = () => {
       setText(initData);
     });
   }, []);
-
+  
   useEffect(() => {
-    dispatch({
-      type: "changeText",
-      payload: {
-        text: text
-      }
-    });
-    setCount(count + 1);
-    if(count === 5) {
-      socket.emit("change text", text);
-      setCount(0);
-    }
+    // if(serverFlag === false) {
+      dispatch({
+        type: "changeText",
+        payload: {
+          text: text
+        }
+      });
+      socket.emit("change text", { text: text, path: edit });
+    // }
+    // serverFlag = false;
   }, [text]);
 
   return (

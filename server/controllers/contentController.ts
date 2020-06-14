@@ -14,11 +14,12 @@ const getContent = async (editPath: string) => {
   return data.text;
 };
 
-const updateContent = (text: string) => {
-
+const updateContent = async (data: any) => {
+  await Contents.findOneAndUpdate(data.path, { text: data.text });
   return;
 };
 
 export {
-  getContent
+  getContent,
+  updateContent
 }

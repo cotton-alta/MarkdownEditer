@@ -40,9 +40,11 @@ const io = socket(server);
 io.sockets.on("connection", (socket: any) => {
   let editPath: string,
       initData: string;
+
   socket.on("create connection", () => {
     console.log("server ok!");
   });
+
   socket.on("path connection", (path: any) => {
     editPath = path;
     contentController.getContent(editPath)
@@ -54,11 +56,10 @@ io.sockets.on("connection", (socket: any) => {
       socket.emit("init data", initData);
     });
   });
-  let state_text = "";
 
-  socket.on("change text", (text: string) => {
-    state_text = text;
-    console.log(state_text);
+  socket.on("change text", (data: any) => {
+    contentController.updateContent(data);
+    // socket.emit("server change", data.text);
   });
 
   socket.on('disconnect', function() {
