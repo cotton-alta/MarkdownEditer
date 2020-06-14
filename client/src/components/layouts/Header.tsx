@@ -1,6 +1,6 @@
 import React from "react";
 
-import ModeButton from "../ui/modeButton";
+import ModeButton from "../ui/ModeButton";
 
 import "../../assets/style/header.scss";
 

@@ -21,3 +21,12 @@
     background: #aaaaaa;
   }
 }
+
+.c-button {
+  &-wrapper {
+    height: 30px;
+    width: 30px;
+    background: #FFFFFF;
+    border-radius: 3px;
+  }
+}

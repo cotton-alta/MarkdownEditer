@@ -1,0 +1,21 @@
+.category {
+  &-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+    height: 30px;
+    cursor: pointer;
+    margin: 10px auto;
+  }
+  &-name {
+    width: 70%;
+    background: #FFFFFF;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 3px;
+    a {
+      color: #000000;
+    }
+  }
+}

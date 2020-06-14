@@ -62,7 +62,7 @@ const Edit: React.FC = () => {
   }, [text]);
 
   return (
-    <Editor 
+    <Editor
       className="edit-wrapper"
       mode="markdown"
       theme="terminal"
